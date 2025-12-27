@@ -1,0 +1,207 @@
+<div class="container">
+  <div class="header">
+    <div class="header-left">
+      <h1>{{ 'app.summary' | translate }}</h1>
+      <div class="selectors-container">
+        <select
+          id="categoria"
+          class="styled-select"
+          [(ngModel)]="categoriaSeleccionada"
+          (change)="cambiarCategoria()"
+        >
+          <option value="inicio">{{ 'competitionTable.home.start' | translate }}</option>
+          <option *ngFor="let cat of categorias" [value]="cat">
+            {{ getCategoriaVisual(cat) }}
+          </option>
+        </select>
+        <select
+          id="idioma"
+          class="styled-select"
+          [(ngModel)]="idiomaSeleccionado"
+          (change)="cambiarIdioma()"
+        >
+          <option *ngFor="let idioma of idiomas" [value]="idioma.codigo">
+            {{ idioma.nombre }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <button
+      class="explorer-btn"
+      (click)="refrescarDatos()"
+      [disabled]="cargando"
+    >
+      <i class="fas fa-refresh" [class.fa-spin]="cargando"></i>
+      {{ cargando ? ('common.buttons.loading' | translate) : ('common.buttons.refresh' | translate) }}
+    </button>
+    <!--     <button class="explorer-btn" routerLink="/explorer">
+      <i class="fas fa-search"></i>
+      Explorar Resultados Detallados
+    </button> -->
+  </div>
+
+  <div class="content">
+    <ng-container *ngIf="categoriaSeleccionada === 'inicio'; else tablaVista">
+      <div class="inicio-container">
+        <h2>{{ 'competitionTable.home.title' | translate }}</h2>
+        <div class="categorias-buttons">
+          <button
+            *ngFor="let cat of categorias"
+            class="categoria-btn"
+            (click)="seleccionarCategoria(cat)"
+            [class.active]="categoriaSeleccionada === cat"
+          >
+            {{ getCategoriaVisual(cat) }}
+          </button>
+        </div>
+
+        <h2 class="mt-5">{{ 'competitionTable.home.championshipRules' | translate }}</h2>
+        <button
+          class="concurso-btn normativa-btn"
+          (click)="descargarPDF('avance')"
+        >
+          <i class="fas fa-file-pdf"></i>
+          {{ 'competitionTable.home.downloadAdvance' | translate }}
+        </button>
+        <br />
+        <button
+          class="concurso-btn normativa-btn"
+          (click)="descargarPDF('normativa')"
+        >
+          <i class="fas fa-file-pdf"></i>
+          {{ 'competitionTable.home.downloadRules' | translate }}
+        </button>
+      </div>
+    </ng-container>
+
+    <ng-template #tablaVista>
+      <div class="table-container">
+          <div class="table-header">
+            <h2>
+              {{ 'competitionTable.table.title' | translate }} {{ getCategoriaVisual(categoriaSeleccionada) }}
+            </h2>
+            <div class="header-buttons">
+              <button
+                class="download-btn"
+                (click)="descargarExcelIndividual()"
+                [disabled]="datos.length === 0"
+              >
+                <i class="fas fa-download"></i>
+                {{ 'competitionTable.table.downloadExcel' | translate }}
+              </button>
+              <button
+                class="print-btn"
+                (click)="imprimirIndividual()"
+                [disabled]="datos.length === 0"
+              >
+                <i class="fas fa-print"></i>
+                {{ 'common.buttons.print' | translate }}
+              </button>
+            </div>
+          </div>
+          <div *ngIf="datos && datos.length === 0" class="empty-state">
+            <p>
+              {{ 'competitionTable.table.emptyState' | translate }}
+            </p>
+          </div>
+          <table class="competition-table" *ngIf="datos.length > 0">
+            <thead>
+              <tr>
+                <th *ngIf="datos[0]?.mostrarClasificacion">{{ 'competitionTable.table.classification' | translate }}</th>
+                <th>{{ 'common.labels.rider' | translate }}</th>
+                <th>{{ 'common.labels.horse' | translate }}</th>
+                <th>{{ 'common.labels.club' | translate }}</th>
+                <th class="total-column">{{ 'common.labels.total' | translate }}</th>
+                <th>{{ 'common.days.saturday' | translate }}</th>
+                <th>{{ 'common.days.sunday' | translate }}</th>
+                <th *ngIf="!categoriaUsaSoloTiempoDomingo(categoriaSeleccionada)">{{ 'common.labels.tiebreak' | translate }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let dato of datos; let i = index"
+                [ngClass]="{
+                  'top-1': i === 0 && dato.mostrarClasificacion,
+                  'top-2': i === 1 && dato.mostrarClasificacion,
+                  'top-3': i === 2 && dato.mostrarClasificacion,
+                  'top-4': i === 3 && dato.mostrarClasificacion,
+                  'top-5': i === 4 && dato.mostrarClasificacion,
+                  'top-6': i === 5 && dato.mostrarClasificacion,
+                  'top-7': i === 6 && dato.mostrarClasificacion,
+                  'top-8': i === 7 && dato.mostrarClasificacion,
+                  'top-9': i === 8 && dato.mostrarClasificacion,
+                  'top-10': i === 9 && dato.mostrarClasificacion
+                }"
+              >
+                <td *ngIf="dato.mostrarClasificacion">
+                  {{ dato.clasificacion }}
+                </td>
+                <td>
+                  <span
+                    *ngIf="
+                      i === 0 &&
+                      dato.mostrarClasificacion
+                    "
+                    >🥇</span
+                  >
+                  <span
+                    *ngIf="
+                      i === 1 &&
+                      dato.mostrarClasificacion
+                    "
+                    >🥈</span
+                  >
+                  <span
+                    *ngIf="
+                      i === 2 &&
+                      dato.mostrarClasificacion
+                    "
+                    >🥉</span
+                  >
+                  <span
+                    [class.winner-name]="
+                      i === 0 &&
+                      dato.mostrarClasificacion
+                    "
+                    [class.top3-name]="
+                      (i === 1 || i === 2) &&
+                      dato.mostrarClasificacion
+                    "
+                  >
+                    {{ dato.nombreJinete | uppercase }}
+                  </span>
+                </td>
+                <td>{{ dato.caballo | uppercase }}</td>
+                <td>{{ dato.club | uppercase }}</td>
+                <td class="total-column">{{ dato.total }}</td>
+                <td
+                  [title]="getTooltipText(dato.sabado)"
+                  [class.tooltip-bottom]="i >= datos.length - 3"
+                >
+                  {{
+                    dato.sabado.puntos !== undefined &&
+                    dato.sabado.puntos !== null
+                      ? dato.sabado.puntos
+                      : "-"
+                  }}
+                </td>
+                <td
+                  [title]="getTooltipText(dato.domingo)"
+                  [class.tooltip-bottom]="i >= datos.length - 3"
+                >
+                  {{ formatearDomingo(dato.domingo) | uppercase }}
+                </td>
+                <td
+                  *ngIf="!categoriaUsaSoloTiempoDomingo(categoriaSeleccionada)"
+                  [title]="getTooltipText(dato.desempate)"
+                  [class.tooltip-bottom]="i >= datos.length - 3"
+                >
+                  {{ formatearDesempate(dato.desempate) | uppercase }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </ng-template>
+  </div>
+</div>

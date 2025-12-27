@@ -1,0 +1,216 @@
+<div class="admin-container">
+  <div class="admin-header">
+    <h1>{{ 'admin.panel.title' | translate }}</h1>
+    <div class="header-right">
+      <button class="back-btn" (click)="volverAResultados()">
+        {{ 'admin.panel.backToResults' | translate }}
+      </button>
+      <button class="logout-btn" (click)="logout()">{{ 'admin.panel.logout' | translate }}</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button
+      [class.active]="activeTab === 'buscador'"
+      (click)="activeTab = 'buscador'"
+      class="tab-btn"
+    >
+      {{ 'admin.panel.tabs.search' | translate }}
+    </button>
+    <button
+      [class.active]="activeTab === 'resultados'"
+      (click)="activeTab = 'resultados'"
+      class="tab-btn"
+    >
+      {{ 'admin.panel.tabs.results' | translate }}
+    </button>
+  </div>
+
+  <!-- Pestaña de Resultados -->
+  <div *ngIf="activeTab === 'resultados'" class="tab-content">
+    <div class="judge-downloads-header">
+      <div class="title">
+        <h2>{{ 'admin.judgeDownloads.title' | translate }}</h2>
+        <p>{{ 'admin.judgeDownloads.description' | translate }}</p>
+      </div>
+    </div>
+
+    <!-- Descarga por categoría (unificado) -->
+    <div class="categorias-actions">
+      <div class="categoria-action" *ngFor="let cat of categorias">
+        <span class="cat-name">{{ getCategoriaVisual(cat) }}</span>
+        <div class="action-buttons">
+          <button class="export-excel-btn" (click)="exportarClasificacion('SEDE', cat)" [title]="'admin.judgeDownloads.downloadCategory' | translate">
+            {{ 'admin.judgeDownloads.downloadCategory' | translate }}
+          </button>
+          <button class="template-btn" (click)="descargarPlantillaCategoria('SEDE', cat)" [title]="'admin.judgeDownloads.templateCategory' | translate">
+            {{ 'admin.judgeDownloads.templateCategory' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="concurso-section" *ngFor="let concurso of concursos">
+      <h2>{{ concurso }}</h2>
+      <div class="tables-grid">
+        <div class="table-card" *ngFor="let dia of dias">
+          <h3>{{ dia }}</h3>
+          <div class="categorias-list">
+            <div class="categoria-item" *ngFor="let categoria of categorias">
+              <div class="categoria-header">
+                <span>{{ getCategoriaVisual(categoria) }}</span>
+                <div class="categoria-actions" *ngIf="!hasData(concurso, dia, categoria)">
+                  <button
+                    class="template-btn"
+                    (click)="descargarPlantilla(concurso, dia, categoria)"
+                    [title]="'admin.judgeDownloads.template' | translate"
+                  >
+                    {{ 'admin.judgeDownloads.template' | translate }}
+                  </button>
+                  <button
+                    class="import-btn"
+                    (click)="importExcel(concurso, dia, categoria)"
+                  >
+                    {{ 'admin.judgeDownloads.importExcel' | translate }}
+                  </button>
+                </div>
+              </div>
+              <div
+                *ngIf="hasData(concurso, dia, categoria)"
+                class="data-status"
+              >
+                <span>{{ 'admin.judgeDownloads.dataLoaded' | translate }}</span>
+                <div class="actions">
+                  <button
+                    class="open-excel-btn"
+                    (click)="abrirExcel(concurso, dia, categoria)"
+                    [title]="'admin.judgeDownloads.open' | translate"
+                  >
+                    <i class="fas fa-file-excel"></i> {{ 'admin.judgeDownloads.open' | translate }}
+                  </button>
+                  <button
+                    class="download-csv-btn"
+                    (click)="descargarCSV(concurso, dia, categoria)"
+                    [title]="'admin.judgeDownloads.csv' | translate"
+                  >
+                    {{ 'admin.judgeDownloads.csv' | translate }}
+                  </button>
+                  <button
+                    class="export-excel-btn"
+                    (click)="exportarExcel(concurso, dia, categoria)"
+                    [title]="'admin.judgeDownloads.excel' | translate"
+                  >
+                    {{ 'admin.judgeDownloads.excel' | translate }}
+                  </button>
+                  <button
+                    *ngIf="dia === 'DOMINGO'"
+                    class="export-excel-btn"
+                    (click)="exportarClasificacion(concurso, categoria)"
+                    [title]="'admin.judgeDownloads.classification' | translate"
+                  >
+                    {{ 'admin.judgeDownloads.classification' | translate }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pestaña de Buscador -->
+  <div *ngIf="activeTab === 'buscador'" class="tab-content">
+    <div class="search-section">
+      <div class="search-box">
+        <div class="autocomplete-container">
+          <input
+            type="text"
+            [(ngModel)]="searchTerm"
+            (input)="onSearchInput($any($event.target).value)"
+            [placeholder]="'admin.search.placeholder' | translate"
+            class="search-input"
+            autocomplete="off"
+          />
+          <div
+            *ngIf="mostrarSugerencias && sugerencias.length > 0"
+            class="sugerencias-dropdown"
+          >
+            <div
+              *ngFor="let sugerencia of sugerencias"
+              class="sugerencia-item"
+              (click)="seleccionarSugerencia(sugerencia)"
+            >
+              <span class="sugerencia-tipo">{{
+                sugerencia.tipo === "jinete" ? "👤" : "🐎"
+              }}</span>
+              <span class="sugerencia-nombre">{{
+                sugerencia.tipo === "jinete"
+                  ? sugerencia.nombre
+                  : sugerencia.caballo
+              }}</span>
+              <span class="sugerencia-detalle">
+                {{
+                  sugerencia.tipo === "jinete"
+                    ? sugerencia.caballo
+                    : sugerencia.nombre
+                }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="isLoading" class="loading">{{ 'common.messages.searching' | translate }}</div>
+
+      <div *ngIf="resultadosBusqueda.length > 0" class="results-table">
+        <table>
+          <thead>
+            <tr>
+              <th>{{ 'admin.search.tableHeaders.competition' | translate }}</th>
+              <th>{{ 'common.labels.day' | translate }}</th>
+              <th>{{ 'common.labels.category' | translate }}</th>
+              <th>{{ 'common.labels.rider' | translate }}</th>
+              <th>{{ 'common.labels.license' | translate }}</th>
+              <th>{{ 'common.labels.horse' | translate }}</th>
+              <th>Lac</th>
+              <th>{{ 'common.labels.time' | translate }}</th>
+              <th>{{ 'common.labels.points' | translate }}</th>
+              <th>{{ 'common.labels.club' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let resultado of resultadosBusqueda">
+              <td>{{ resultado.concurso }}</td>
+              <td>{{ resultado.dia }}</td>
+              <td>{{ getCategoriaVisual(resultado.categoria) }}</td>
+              <td>{{ resultado.nombre }}</td>
+              <td>{{ resultado.licencia }}</td>
+              <td>{{ resultado.caballo }}</td>
+              <td>{{ resultado.lac }}</td>
+              <td>{{ resultado.tiempo }}</td>
+              <td>{{ resultado.puntos }}</td>
+              <td>{{ resultado.club }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div
+        *ngIf="!isLoading && searchTerm && resultadosBusqueda.length === 0"
+        class="no-results"
+      >
+        {{ 'admin.search.noResults' | translate: { searchTerm: searchTerm } }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Input oculto para la selección de archivos -->
+  <input
+    #fileInput
+    type="file"
+    accept=".xlsx,.xls"
+    style="display: none"
+    (change)="onFileSelected($event)"
+  />
+</div>
