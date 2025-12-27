@@ -39,13 +39,13 @@
     }
   },
   "app": {
-    "title": "Ponizko Bizkaiko Oztopo-jauziko 2025eko Txapelketaren sailkapena 2025",
-    "summary": " Ponizko Bizkaiko Oztopo-jauziko 2025eko Txapelketaren laburpena 2025"
+    "title": "Ponizko Euskadiko Oztopo-jauziko 2025eko Txapelketaren sailkapena 2025",
+    "summary": " Ponizko Euskadiko Oztopo-jauziko 2025eko Txapelketaren laburpena 2025"
   },
   "competitionTable": {
     "home": {
       "title": "Kategoriaren araberako sailkapena",
-      "championshipRules": "Ponizko Bizkaiko Oztopo-jauziko 2025eko Txapelketaren oinarriak",
+      "championshipRules": "Ponizko Euskadiko Oztopo-jauziko 2025eko Txapelketaren oinarriak",
       "downloadAdvance": "2025EKO EGITARAUA JAITSI",
       "downloadRules": "2025EKO ARAUDIA JAISI",
       "start": "Hasiera"

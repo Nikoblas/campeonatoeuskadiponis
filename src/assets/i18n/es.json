@@ -40,13 +40,13 @@
     }
   },
   "app": {
-    "title": "Clasificación de Campeonato de Bizkaia de Ponis de Salto 2025",
-    "summary": "Resumen de Campeonato de Bizkaia de Ponis de Salto 2025"
+    "title": "Clasificación de Campeonato de Euskadi de Ponis de Salto 2025",
+    "summary": "Resumen de Campeonato de Euskadi de Ponis de Salto 2025"
   },
   "competitionTable": {
     "home": {
       "title": "Clasificaciones por Categoría",
-      "championshipRules": "Bases del Campeonato de Bizkaia de Ponis de Salto 2025",
+      "championshipRules": "Bases del Campeonato de Euskadi de Ponis de Salto 2025",
       "downloadAdvance": "DESCARGAR AVANCE 2025",
       "downloadRules": "DESCARGAR NORMATIVA 2025",
       "start": "Inicio"
