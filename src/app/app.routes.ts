@@ -11,8 +11,6 @@ export const routes: Routes = [
   { path: 'B2', component: CompetitionTableComponent },
   { path: 'C', component: CompetitionTableComponent },
   { path: 'C2', component: CompetitionTableComponent },
-  { path: 'D', component: CompetitionTableComponent },
-  { path: 'D2', component: CompetitionTableComponent },
   { path: 'explorer', component: CompetitionExplorerComponent },
   {
     path: 'admin',

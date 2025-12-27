@@ -61,10 +61,10 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
 
   /**
    * Verifica si una categoría usa solo el tiempo del domingo (sin archivo DESEMPATE)
-   * Las categorías A2, B2, C2, D2 usan solo tiempo del domingo
+   * Las categorías A2, B2, C2 usan solo tiempo del domingo
    */
   categoriaUsaSoloTiempoDomingo(categoria: string): boolean {
-    return categoria === 'A2' || categoria === 'B2' || categoria === 'C2' || categoria === 'D2';
+    return categoria === 'A2' || categoria === 'B2' || categoria === 'C2';
   }
 
   ngOnInit() {
@@ -426,7 +426,7 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
             resultadosValidos++;
           }
         }
-        // Para categorías A2, B2, C2, D2, usar el tiempo del domingo como desempate
+        // Para categorías A2, B2, C2, usar el tiempo del domingo como desempate
         if (this.categoriaUsaSoloTiempoDomingo(this.categoriaSeleccionada)) {
           if (jinete.domingo && jinete.domingo.tiempo && jinete.domingo.tiempo !== '-') {
             jinete.desempate = {
@@ -469,13 +469,13 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
     const usarSoloTiempo = this.categoriaUsaSoloTiempoDomingo(this.categoriaSeleccionada);
     ordenados = ordenFinal.map((jinete: any) => {
       const puntosDesempate = this.obtenerPuntosDesempate(jinete.desempate);
-      // Para categorías A2, B2, C2, D2, usar el tiempo del domingo directamente
+      // Para categorías A2, B2, C2, usar el tiempo del domingo directamente
       const tiempoDesempate = usarSoloTiempo
         ? this.convertirTiempoASegundos(jinete.domingo?.tiempo || '-')
         : this.convertirTiempoASegundos(jinete.desempate?.tiempo || '-');
 
       // Verificar si cambió el criterio de clasificación
-      // Para categorías A2, B2, C2, D2, solo considerar total y tiempo del domingo (no puntos de desempate)
+      // Para categorías A2, B2, C2, solo considerar total y tiempo del domingo (no puntos de desempate)
       const cambioClasificacion =
         totalAnterior === null ||
         jinete.total !== totalAnterior ||
@@ -692,7 +692,7 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
    * Ordena un grupo de jinetes empatados aplicando las reglas de desempate
    */
   private ordenarGrupoConDesempate(grupo: any[]): any[] {
-    // Para categorías A2, B2, C2, D2, solo usar el tiempo del domingo (sin puntos)
+    // Para categorías A2, B2, C2, solo usar el tiempo del domingo (sin puntos)
     const usarSoloTiempo = this.categoriaUsaSoloTiempoDomingo(this.categoriaSeleccionada);
 
     return grupo.sort((a: any, b: any) => {
@@ -732,7 +732,7 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
    * Obtiene los puntos del desempate para ordenamiento
    */
   private obtenerPuntosDesempate(desempate: CompetitionDay): number {
-    // Para categorías A2, B2, C2, D2, siempre devolver 0 ya que solo se usa el tiempo
+    // Para categorías A2, B2, C2, siempre devolver 0 ya que solo se usa el tiempo
     if (this.categoriaUsaSoloTiempoDomingo(this.categoriaSeleccionada)) {
       return 0;
     }
@@ -766,7 +766,7 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
 
   /**
    * Formatea la visualización del domingo
-   * Para categorías A2, B2, C2, D2 muestra "puntos/tiempo", para otras (A, B, C, D) solo puntos
+   * Para categorías A2, B2, C2 muestra "puntos/tiempo", para otras (A, B, C) solo puntos
    */
   formatearDomingo(domingo: CompetitionDay): string {
     const usarSoloTiempo = this.categoriaUsaSoloTiempoDomingo(this.categoriaSeleccionada);
@@ -791,12 +791,12 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
     const puntos = domingo.puntos;
     const tiempo = domingo.tiempo || '-';
 
-    // Para categorías A2, B2, C2, D2, mostrar "puntos/tiempo"
+    // Para categorías A2, B2, C2, mostrar "puntos/tiempo"
     if (usarSoloTiempo) {
       return `${puntos}/${tiempo}`;
     }
 
-    // Para otras categorías (A, B, C, D), solo mostrar puntos
+    // Para otras categorías (A, B, C), solo mostrar puntos
     return `${puntos}`;
   }
 
@@ -804,7 +804,7 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
    * Formatea la visualización del desempate (puntos/tiempo)
    */
   formatearDesempate(desempate: CompetitionDay): string {
-    // Para categorías A2, B2, C2, D2, mostrar solo el tiempo
+    // Para categorías A2, B2, C2, mostrar solo el tiempo
     const usarSoloTiempo = this.categoriaUsaSoloTiempoDomingo(this.categoriaSeleccionada);
 
     if (usarSoloTiempo) {
@@ -835,7 +835,7 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
    * Verifica si un jinete tiene desempate válido para mostrar estilos especiales
    */
   tieneDesempateValido(dato: CompetitionData): boolean {
-    // Para categorías A2, B2, C2, D2, solo verificar si tiene tiempo válido
+    // Para categorías A2, B2, C2, solo verificar si tiene tiempo válido
     const usarSoloTiempo = this.categoriaUsaSoloTiempoDomingo(this.categoriaSeleccionada);
     
     if (usarSoloTiempo) {

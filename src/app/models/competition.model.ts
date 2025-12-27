@@ -15,7 +15,7 @@ export interface CompetitionRow {
 export interface CompetitionFileData {
   concurso: string; // Ej: 'CIZUR'
   dia: string; // Ej: 'SABADO' o 'DOMINGO'
-  categoria: string; // Ej: 'A', 'A2', 'B', 'B2', 'C', 'C2', 'D', 'D2'
+  categoria: string; // Ej: 'A', 'A2', 'B', 'B2', 'C', 'C2'
   datos: CompetitionRow[];
   archivo: string; // Nombre del archivo
 }
@@ -139,8 +139,6 @@ export const CATEGORIAS: readonly string[] = [
   'B2',
   'C',
   'C2',
-  'D',
-  'D2',
 ] as const;
 
 /**
