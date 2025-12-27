@@ -61,8 +61,8 @@ export class CompetitionService {
    */
   getCategoriaVisual(categoria: string): string {
     // Convertir 'A' a 'Ponis A', 'A2' a 'Ponis A2', etc.
-    if (categoria === 'A' || categoria === 'A2' || categoria === 'B' || categoria === 'B2' || 
-        categoria === 'C' || categoria === 'C2') {
+    if (categoria === 'A' || categoria === 'A2' || categoria === 'B2' || 
+        categoria === 'C2' || categoria === 'D2') {
       return `Ponis ${categoria}`;
     }
     return categoria;

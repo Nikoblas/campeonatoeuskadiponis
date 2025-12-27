@@ -7,10 +7,9 @@ export const routes: Routes = [
   { path: '', component: CompetitionTableComponent },
   { path: 'A', component: CompetitionTableComponent },
   { path: 'A2', component: CompetitionTableComponent },
-  { path: 'B', component: CompetitionTableComponent },
   { path: 'B2', component: CompetitionTableComponent },
-  { path: 'C', component: CompetitionTableComponent },
   { path: 'C2', component: CompetitionTableComponent },
+  { path: 'D2', component: CompetitionTableComponent },
   { path: 'explorer', component: CompetitionExplorerComponent },
   {
     path: 'admin',
