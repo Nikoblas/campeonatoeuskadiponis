@@ -265,7 +265,8 @@ export class AdminDashboardComponent implements OnInit {
 
   abrirExcel(concurso: string, dia: string, categoria: string) {
     const fileName = `${dia}${categoria}.xlsx`;
-    const filePath = `assets/data/${concurso}/${fileName}`;
+    const temporada = this.competitionService.getTemporadaActiva();
+    const filePath = `assets/data/${temporada}/${concurso}/${fileName}`;
 
     // Descargar el archivo
     this.http.get(filePath, { responseType: 'blob' }).subscribe(

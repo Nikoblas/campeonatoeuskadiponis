@@ -32,6 +32,8 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
     { codigo: 'es', nombre: 'Español' },
     { codigo: 'eus', nombre: 'Euskera' }
   ];
+  temporadas: string[] = [];
+  temporadaSeleccionada: string = '2025';
   idiomaSeleccionado: string = 'es';
   private subscriptions: Subscription[] = [];
 
@@ -70,6 +72,8 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.categorias = this.competitionService.getCategorias();
+    this.temporadas = this.competitionService.getTemporadas();
+    this.temporadaSeleccionada = this.competitionService.getTemporadaActiva();
     
     // Cargar idioma guardado o usar el idioma actual del servicio
     const idiomaGuardado = localStorage.getItem('idiomaSeleccionado');
@@ -178,6 +182,13 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
   cambiarIdioma() {
     localStorage.setItem('idiomaSeleccionado', this.idiomaSeleccionado);
     this.translateService.loadTranslations(this.idiomaSeleccionado);
+  }
+
+  cambiarTemporada() {
+    this.competitionService.setTemporadaActiva(this.temporadaSeleccionada);
+    if (this.categoriaSeleccionada !== 'inicio') {
+      this.cargarDatos();
+    }
   }
 
   refrescarDatos() {

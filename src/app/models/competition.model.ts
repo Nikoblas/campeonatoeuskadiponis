@@ -130,6 +130,16 @@ export interface SugerenciaBusqueda {
 export const CONCURSOS: readonly string[] = ['SEDE'] as const;
 
 /**
+ * Temporadas disponibles para cargar archivos de datos
+ */
+export const AVAILABLE_SEASONS: readonly string[] = ['2025', '2026'] as const;
+
+/**
+ * Temporada por defecto al iniciar la app
+ */
+export const TEMPORADA_DEFAULT = '2025' as const;
+
+/**
  * Lista de categorías disponibles
  */
 export const CATEGORIAS: readonly string[] = [

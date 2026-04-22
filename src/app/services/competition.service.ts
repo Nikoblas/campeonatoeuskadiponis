@@ -23,6 +23,8 @@ import {
   ATLETA_KEYS,
   CL_KEYS,
   ELIMINACIONES,
+  AVAILABLE_SEASONS,
+  TEMPORADA_DEFAULT,
 } from '../models/competition.model';
 
 @Injectable({
@@ -32,6 +34,8 @@ export class CompetitionService {
   private readonly concursos = [...CONCURSOS];
   private readonly categorias = [...CATEGORIAS];
   private readonly dias = [...DIAS];
+  private readonly temporadasDisponibles = [...AVAILABLE_SEASONS];
+  private temporadaActiva: string = TEMPORADA_DEFAULT;
 
   private datosMemoria: { [concurso: string]: CompetitionFileData[] } = {};
   private faltantesMemoria: { [concurso: string]: string[] } = {};
@@ -54,6 +58,25 @@ export class CompetitionService {
 
   getDias(): string[] {
     return this.dias;
+  }
+
+  getTemporadas(): string[] {
+    return this.temporadasDisponibles;
+  }
+
+  getTemporadaActiva(): string {
+    return this.temporadaActiva;
+  }
+
+  setTemporadaActiva(temporada: string): void {
+    if (!this.temporadasDisponibles.includes(temporada)) {
+      return;
+    }
+    if (this.temporadaActiva === temporada) {
+      return;
+    }
+    this.temporadaActiva = temporada;
+    this.refrescarDatos();
   }
 
   /**
@@ -208,8 +231,8 @@ export class CompetitionService {
     if (this.admitidosMemoria) {
       return of(void 0);
     }
-    const pathXls = `assets/data/SEDE/admitidos.xls`;
-    const pathXlsx = `assets/data/SEDE/admitidos.xlsx`;
+    const pathXls = this.getDataPath('SEDE', 'admitidos.xls');
+    const pathXlsx = this.getDataPath('SEDE', 'admitidos.xlsx');
     return this.http.get(pathXls, { responseType: 'arraybuffer' }).pipe(
       map((data) => {
         this.parseAdmitidosExcel(data);
@@ -305,8 +328,8 @@ export class CompetitionService {
     if (this.equiposMemoria) {
       return of(this.equiposMemoria);
     }
-    const pathXls = `assets/data/SEDE/EQUIPOS.xls`;
-    const pathXlsx = `assets/data/SEDE/EQUIPOS.xlsx`;
+    const pathXls = this.getDataPath('SEDE', 'EQUIPOS.xls');
+    const pathXlsx = this.getDataPath('SEDE', 'EQUIPOS.xlsx');
     return this.http.get(pathXls, { responseType: 'arraybuffer' }).pipe(
       map((data) => this.parseEquiposExcel(data)),
       catchError(() =>
@@ -353,8 +376,8 @@ export class CompetitionService {
     categoria: string
   ): Observable<CompetitionFileData | { faltante: string }> {
     const baseName = `${dia}${categoria}`;
-    const filePathXls = `assets/data/${concurso}/${baseName}.xls`;
-    const filePathXlsx = `assets/data/${concurso}/${baseName}.xlsx`;
+    const filePathXls = this.getDataPath(concurso, `${baseName}.xls`);
+    const filePathXlsx = this.getDataPath(concurso, `${baseName}.xlsx`);
     console.log(`[CompetitionService] Intentando cargar archivo: ${baseName} (${concurso})`);
     // Intentar primero .xls y luego .xlsx
     return this.http.get(filePathXls, { responseType: 'arraybuffer' }).pipe(
@@ -695,6 +718,10 @@ export class CompetitionService {
     });
 
     return resultados;
+  }
+
+  private getDataPath(concurso: string, fileName: string): string {
+    return `assets/data/${this.temporadaActiva}/${concurso}/${fileName}`;
   }
 }
 

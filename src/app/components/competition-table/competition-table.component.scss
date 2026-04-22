@@ -1,9 +1,7 @@
 .container {
-  padding: 20px;
-  max-width: 1200px;
+  padding: clamp(10px, 2vw, 24px);
+  max-width: 1280px;
   margin: 0 auto;
-  position: relative;
-  z-index: 1;
 }
 
 .header {
@@ -12,11 +10,12 @@
   align-items: center;
   margin-bottom: 30px;
   padding-bottom: 20px;
-  border-bottom: 2px solid rgba(224, 224, 224, 0.8);
-  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--border-soft);
+  background-color: rgba(255, 255, 255, 0.9);
   padding: 15px 20px;
-  border-radius: 8px;
-  backdrop-filter: blur(5px);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(8px);
 }
 
 .header-left {
@@ -26,7 +25,7 @@
 }
 
 h1 {
-  color: #2c3e50;
+  color: var(--text-main);
   font-size: 2.5em;
   margin: 0;
   font-weight: 600;
@@ -41,8 +40,8 @@ h1 {
 .styled-select {
   position: relative;
   padding: 10px 40px 10px 15px;
-  border: 2px solid rgba(52, 152, 219, 0.3);
-  border-radius: 8px;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
   background-color: white;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%233498db' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
@@ -51,7 +50,7 @@ h1 {
   cursor: pointer;
   font-size: 1em;
   font-weight: 500;
-  color: #2c3e50;
+  color: var(--text-main);
   min-width: 140px;
   appearance: none;
   -webkit-appearance: none;
@@ -60,15 +59,15 @@ h1 {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   &:hover {
-    border-color: rgba(52, 152, 219, 0.6);
-    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.2);
+    border-color: #8eb8d4;
+    box-shadow: 0 4px 10px rgba(0, 93, 154, 0.18);
     transform: translateY(-1px);
   }
 
   &:focus {
     outline: none;
-    border-color: #3498db;
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 127, 207, 0.2);
   }
 
   option {
@@ -79,7 +78,7 @@ h1 {
 }
 
 .explorer-btn {
-  background-color: #3498db;
+  background-color: var(--primary);
   color: white;
   border: none;
   padding: 12px 24px;
@@ -92,7 +91,7 @@ h1 {
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #2980b9;
+    background-color: var(--primary-strong);
   }
 
   i {
@@ -101,11 +100,12 @@ h1 {
 }
 
 .content {
-  background-color: rgba(255, 255, 255, 0.95);
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
   padding: 20px;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(8px);
 }
 
 .tabs {
@@ -338,8 +338,8 @@ h1 {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  background: #f4f6fb;
-  border-radius: 10px;
+  background: var(--surface-2);
+  border-radius: var(--radius-md);
   box-shadow: 0 4px 16px rgba(44,62,80,0.07);
   overflow: hidden;
   
@@ -350,7 +350,7 @@ h1 {
   }
 
   th {
-    background: linear-gradient(90deg, #3498db 0%, #6dd5fa 100%);
+    background: linear-gradient(90deg, var(--brand-navy) 0%, var(--primary) 100%);
     color: #fff;
     border: none;
     font-weight: 700;
@@ -360,7 +360,7 @@ h1 {
 
   td {
     border: none;
-    color: #2c3e50;
+    color: var(--text-main);
     background: transparent;
     transition: background 0.2s;
   }
@@ -396,7 +396,7 @@ h1 {
   .winner-name {
     font-size: 1.3em !important;
     font-weight: 800 !important;
-    color: #d4af37 !important;
+    color: #b8860b !important;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     letter-spacing: 0.5px;
   }
@@ -404,7 +404,7 @@ h1 {
   .top3-name {
     font-size: 1.15em !important;
     font-weight: 700 !important;
-    color: #2c3e50 !important;
+    color: var(--text-main) !important;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   }
 

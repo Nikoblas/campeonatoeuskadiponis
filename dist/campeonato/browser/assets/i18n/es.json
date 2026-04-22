@@ -1,0 +1,119 @@
+{
+  "common": {
+    "buttons": {
+      "refresh": "Refrescar",
+      "loading": "Cargando...",
+      "download": "Descargar",
+      "print": "Imprimir",
+      "back": "Volver",
+      "access": "Acceder",
+      "close": "Cerrar",
+      "save": "Guardar",
+      "cancel": "Cancelar",
+      "search": "Buscar"
+    },
+    "labels": {
+      "view": "Vista",
+      "category": "Categoría",
+      "day": "Día",
+      "rider": "Jinete/Amazona",
+      "horse": "Caballo",
+      "total": "Total",
+      "classification": "Clasificación",
+      "tiebreak": "Desempate",
+      "license": "Licencia",
+      "time": "Tiempo",
+      "points": "Puntos",
+      "club": "Club",
+      "competition": "Concurso",
+      "password": "Contraseña"
+    },
+    "days": {
+      "saturday": "Sábado",
+      "sunday": "Domingo"
+    },
+    "messages": {
+      "noResults": "No se encontraron resultados",
+      "searching": "Buscando...",
+      "error": "Error",
+      "success": "Éxito"
+    }
+  },
+  "app": {
+    "title": "Clasificación de Campeonato de Euskadi de Ponis de Salto 2025",
+    "summary": "Resumen de Campeonato de Euskadi de Ponis de Salto 2025"
+  },
+  "competitionTable": {
+    "home": {
+      "title": "Clasificaciones por Categoría",
+      "championshipRules": "Bases del Campeonato de Euskadi de Ponis de Salto 2025",
+      "downloadAdvance": "DESCARGAR AVANCE 2025",
+      "downloadRules": "DESCARGAR NORMATIVA 2025",
+      "start": "Inicio"
+    },
+    "table": {
+      "title": "Clasificación",
+      "classification": "Clas.",
+      "emptyState": "Todavía no hay resultados disponibles para esta categoría. El comité organizador publicará los listados a medida que finalicen las pruebas y se validen los datos. Por favor, vuelve a intentarlo en unos minutos.",
+      "downloadExcel": "Descargar Excel"
+    }
+  },
+  "admin": {
+    "panel": {
+      "title": "Panel de Administración",
+      "backToResults": "← Volver a Resultados",
+      "logout": "Cerrar Sesión",
+      "tabs": {
+        "search": "Buscador",
+        "results": "Resultados"
+      }
+    },
+    "judgeDownloads": {
+      "title": "Descargas para jueces",
+      "description": "Descarga por categoría el resumen (como la tabla pública) o plantillas.",
+      "downloadCategory": "⬇️ Descargar categoría",
+      "templateCategory": "📄 Plantilla categoría",
+      "template": "📄 Plantilla",
+      "importExcel": "Importar Excel",
+      "dataLoaded": "Datos cargados",
+      "open": "Abrir",
+      "csv": "⬇️ CSV",
+      "excel": "⬇️ Excel",
+      "classification": "🏆 Clasificación"
+    },
+    "search": {
+      "placeholder": "Buscar jinete/Amazona o caballo...",
+      "noResults": "No se encontraron resultados para \"{{searchTerm}}\"",
+      "tableHeaders": {
+        "competition": "Concurso",
+        "day": "Día",
+        "category": "Categoría",
+        "rider": "Jinete/Amazona",
+        "license": "Licencia",
+        "horse": "Caballo",
+        "lac": "Lac",
+        "time": "Tiempo",
+        "points": "Puntos",
+        "club": "Club"
+      }
+    },
+    "login": {
+      "title": "Acceso Administrador",
+      "backToResults": "← Volver a Resultados",
+      "wrongPassword": "Contraseña incorrecta"
+    }
+  },
+  "explorer": {
+    "title": "Explorador de Resultados",
+    "backToSummary": "Volver al Resumen",
+    "adminPanel": "Panel Admin",
+    "results": "Resultados",
+    "details": {
+      "title": "Detalles del Resultado"
+    }
+  },
+  "errors": {
+    "downloadPdf": "Error al descargar el PDF. Por favor, inténtalo de nuevo más tarde."
+  }
+}
+

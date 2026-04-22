@@ -24,6 +24,16 @@
             {{ idioma.nombre }}
           </option>
         </select>
+        <select
+          id="temporada"
+          class="styled-select"
+          [(ngModel)]="temporadaSeleccionada"
+          (change)="cambiarTemporada()"
+        >
+          <option *ngFor="let temporada of temporadas" [value]="temporada">
+            {{ temporada }}
+          </option>
+        </select>
       </div>
     </div>
     <button

@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Version>14.00</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <AllowPNG/>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>9360</WindowHeight>
+  <WindowWidth>9705</WindowWidth>
+  <WindowTopX>270</WindowTopX>
+  <WindowTopY>630</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s62">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="Arial" ss:Bold="1"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Sheet1">
+  <Table ss:ExpandedColumnCount="9" ss:ExpandedRowCount="11" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="200.25" ss:DefaultRowHeight="15">
+   <Column ss:Width="20.25"/>
+   <Column ss:Width="279.75"/>
+   <Column ss:Width="80.25"/>
+   <Column ss:Width="330"/>
+   <Column ss:Width="240"/>
+   <Column ss:Width="80.25"/>
+   <Column ss:Width="90"/>
+   <Column ss:Width="60"/>
+   <Column ss:Width="69.75"/>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Cl</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Atleta</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">lic</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Club</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Caballo</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">lac</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Puntos</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Tiempo</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Premios</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="String">IZARO PEREZ FUENTE</Data></Cell>
+    <Cell><Data ss:Type="Number">341174</Data></Cell>
+    <Cell><Data ss:Type="String">C.D. SEA HORSE DE URDULIZ</Data></Cell>
+    <Cell><Data ss:Type="String">ITZAL FLORIDA</Data></Cell>
+    <Cell><Data ss:Type="Number">143698</Data></Cell>
+    <Cell><Data ss:Type="String">0 (0+0)</Data></Cell>
+    <Cell><Data ss:Type="Number">35.229999999999997</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="String">IRATI ELUSTONDO DIAZ</Data></Cell>
+    <Cell><Data ss:Type="Number">341172</Data></Cell>
+    <Cell><Data ss:Type="String">PARTICULAR BIZKAIA</Data></Cell>
+    <Cell><Data ss:Type="String">LUNA</Data></Cell>
+    <Cell><Data ss:Type="Number">167033</Data></Cell>
+    <Cell><Data ss:Type="String">0 (0+0)</Data></Cell>
+    <Cell><Data ss:Type="Number">38.47</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="String">ENDIKA BORDAGARAY FRADEJAS</Data></Cell>
+    <Cell><Data ss:Type="Number">306526</Data></Cell>
+    <Cell><Data ss:Type="String">CLUB HIPICO BURUBIO</Data></Cell>
+    <Cell><Data ss:Type="String">TXIO TXIO DE AIALA</Data></Cell>
+    <Cell><Data ss:Type="Number">166508</Data></Cell>
+    <Cell><Data ss:Type="String">8 (8+0)</Data></Cell>
+    <Cell><Data ss:Type="Number">37.46</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="String">ITSASNE URANGA GALINDO</Data></Cell>
+    <Cell><Data ss:Type="Number">377945</Data></Cell>
+    <Cell><Data ss:Type="String">C.D. DE HIPICA AZKORRA DE IURRETA</Data></Cell>
+    <Cell><Data ss:Type="String">BLACKY ZA</Data></Cell>
+    <Cell><Data ss:Type="String">VS8695</Data></Cell>
+    <Cell><Data ss:Type="String">8 (8+0)</Data></Cell>
+    <Cell><Data ss:Type="Number">52.15</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="String">SOFIA ELIZONDO DE TORREGROSA</Data></Cell>
+    <Cell><Data ss:Type="Number">254047</Data></Cell>
+    <Cell><Data ss:Type="String">CLUB HIPICO JAIZUBIA</Data></Cell>
+    <Cell><Data ss:Type="String">GUU JI YA DE L'AMBRE</Data></Cell>
+    <Cell><Data ss:Type="Number">174216</Data></Cell>
+    <Cell><Data ss:Type="String">12 (12+0)</Data></Cell>
+    <Cell><Data ss:Type="Number">34.82</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">6</Data></Cell>
+    <Cell><Data ss:Type="String">CLAUDIA GUTIERREZ CABALLERO</Data></Cell>
+    <Cell><Data ss:Type="Number">258707</Data></Cell>
+    <Cell><Data ss:Type="String">C.D. DE HIPICA ARIALDE DE OROBIO</Data></Cell>
+    <Cell><Data ss:Type="String">CANELA</Data></Cell>
+    <Cell><Data ss:Type="Number">160001</Data></Cell>
+    <Cell><Data ss:Type="String">12 (12+0)</Data></Cell>
+    <Cell><Data ss:Type="Number">36.520000000000003</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">7</Data></Cell>
+    <Cell><Data ss:Type="String">MIKEL GARCIA PALMA</Data></Cell>
+    <Cell><Data ss:Type="Number">286469</Data></Cell>
+    <Cell><Data ss:Type="String">C.D. DE HIPICA ARIALDE DE OROBIO</Data></Cell>
+    <Cell><Data ss:Type="String">GALA SIERRA DE ELGUEA ZA</Data></Cell>
+    <Cell><Data ss:Type="Number">146083</Data></Cell>
+    <Cell><Data ss:Type="String">20 (20+0)</Data></Cell>
+    <Cell><Data ss:Type="Number">37.979999999999997</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">MAIALEN UGALDE PATIÑO</Data></Cell>
+    <Cell><Data ss:Type="Number">349898</Data></Cell>
+    <Cell><Data ss:Type="String">CLUB HIPICO CASTILLO DE BUTRON</Data></Cell>
+    <Cell><Data ss:Type="String">ZEUS</Data></Cell>
+    <Cell><Data ss:Type="Number">168016</Data></Cell>
+    <Cell><Data ss:Type="String">EL</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">LIBE ZABALA ZARZUELA</Data></Cell>
+    <Cell><Data ss:Type="Number">269828</Data></Cell>
+    <Cell><Data ss:Type="String">C.D. DE HIPICA ARIALDE DE OROBIO</Data></Cell>
+    <Cell><Data ss:Type="String">SALIMA CG</Data></Cell>
+    <Cell><Data ss:Type="Number">147922</Data></Cell>
+    <Cell><Data ss:Type="String">EL</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Selected/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>1</ActiveRow>
+     <ActiveCol>2</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>
