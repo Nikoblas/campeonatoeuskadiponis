@@ -140,15 +140,13 @@ export const AVAILABLE_SEASONS: readonly string[] = ['2025', '2026'] as const;
 export const TEMPORADA_DEFAULT = '2025' as const;
 
 /**
- * Lista de categorías disponibles
+ * Listas de categorías disponibles por temporada
  */
-export const CATEGORIAS: readonly string[] = [
-  'A',
-  'A2',
-  'B2',
-  'C2',
-  'D2',
-] as const;
+export const CATEGORIAS_POR_TEMPORADA: Readonly<Record<string, readonly string[]>> =
+  {
+    '2025': ['A', 'A2', 'B2', 'C2', 'D2'],
+    '2026': ['A2', 'A', 'B2', 'B', 'C2', 'C', 'D2', 'D'],
+  } as const;
 
 /**
  * Lista de días de competición

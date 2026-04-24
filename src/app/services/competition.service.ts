@@ -17,14 +17,13 @@ import {
   CompetitionImportResult,
   ResultadoDia,
   CONCURSOS,
-  CATEGORIAS,
+  CATEGORIAS_POR_TEMPORADA,
   DIAS,
   LICENCIA_KEYS,
   ATLETA_KEYS,
   CL_KEYS,
   ELIMINACIONES,
   AVAILABLE_SEASONS,
-  TEMPORADA_DEFAULT,
 } from '../models/competition.model';
 
 @Injectable({
@@ -32,10 +31,9 @@ import {
 })
 export class CompetitionService {
   private readonly concursos = [...CONCURSOS];
-  private readonly categorias = [...CATEGORIAS];
   private readonly dias = [...DIAS];
   private readonly temporadasDisponibles = [...AVAILABLE_SEASONS];
-  private temporadaActiva: string = TEMPORADA_DEFAULT;
+  private temporadaActiva: string = this.getTemporadaMasAlta();
 
   private datosMemoria: { [concurso: string]: CompetitionFileData[] } = {};
   private faltantesMemoria: { [concurso: string]: string[] } = {};
@@ -53,7 +51,7 @@ export class CompetitionService {
   }
 
   getCategorias(): string[] {
-    return this.categorias;
+    return [...(CATEGORIAS_POR_TEMPORADA[this.temporadaActiva] ?? [])];
   }
 
   getDias(): string[] {
@@ -79,13 +77,28 @@ export class CompetitionService {
     this.refrescarDatos();
   }
 
+  private getTemporadaMasAlta(): string {
+    const temporadasOrdenadas = [...this.temporadasDisponibles].sort(
+      (a, b) => Number(b) - Number(a)
+    );
+    return temporadasOrdenadas[0] ?? '2025';
+  }
+
   /**
    * Convierte una categoría interna (ej: 'A') a formato visual (ej: 'Ponis A')
    */
   getCategoriaVisual(categoria: string): string {
     // Convertir 'A' a 'Ponis A', 'A2' a 'Ponis A2', etc.
-    if (categoria === 'A' || categoria === 'A2' || categoria === 'B2' || 
-        categoria === 'C2' || categoria === 'D2') {
+    if (
+      categoria === 'A' ||
+      categoria === 'A2' ||
+      categoria === 'B' ||
+      categoria === 'B2' ||
+      categoria === 'C' ||
+      categoria === 'C2' ||
+      categoria === 'D' ||
+      categoria === 'D2'
+    ) {
       return `Ponis ${categoria}`;
     }
     return categoria;
@@ -201,8 +214,9 @@ export class CompetitionService {
   ): Observable<CompetitionImportResult> {
     const requests: Observable<CompetitionFileData | { faltante: string }>[] =
       [];
+    const categorias = this.getCategorias();
     for (const dia of this.dias) {
-      for (const categoria of this.categorias) {
+      for (const categoria of categorias) {
         requests.push(
           this.getCompetitionFileDataFromFile(concurso, dia, categoria)
         );
