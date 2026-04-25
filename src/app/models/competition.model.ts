@@ -15,7 +15,7 @@ export interface CompetitionRow {
 export interface CompetitionFileData {
   concurso: string; // Ej: 'CIZUR'
   dia: string; // Ej: 'SABADO' o 'DOMINGO'
-  categoria: string; // Ej: 'A', 'A2', 'B2', 'C2', 'D2'
+  categoria: string; // Ej: 'A', 'B2', 'C2', 'D2'
   datos: CompetitionRow[];
   archivo: string; // Nombre del archivo
 }
@@ -135,17 +135,12 @@ export const CONCURSOS: readonly string[] = ['SEDE'] as const;
 export const AVAILABLE_SEASONS: readonly string[] = ['2025', '2026'] as const;
 
 /**
- * Temporada por defecto al iniciar la app
- */
-export const TEMPORADA_DEFAULT = '2025' as const;
-
-/**
  * Listas de categorías disponibles por temporada
  */
 export const CATEGORIAS_POR_TEMPORADA: Readonly<Record<string, readonly string[]>> =
   {
-    '2025': ['A', 'A2', 'B2', 'C2', 'D2'],
-    '2026': ['A2', 'A', 'B2', 'B', 'C2', 'C', 'D2', 'D'],
+    '2025': ['A', 'B2', 'C2', 'D2'],
+    '2026': ['A', 'B2', 'B', 'C2', 'C', 'D2', 'D'],
   } as const;
 
 /**

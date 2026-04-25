@@ -88,10 +88,9 @@ export class CompetitionService {
    * Convierte una categoría interna (ej: 'A') a formato visual (ej: 'Ponis A')
    */
   getCategoriaVisual(categoria: string): string {
-    // Convertir 'A' a 'Ponis A', 'A2' a 'Ponis A2', etc.
+    // Convertir 'A' a 'Ponis A', 'B2' a 'Ponis B2', etc.
     if (
       categoria === 'A' ||
-      categoria === 'A2' ||
       categoria === 'B' ||
       categoria === 'B2' ||
       categoria === 'C' ||
