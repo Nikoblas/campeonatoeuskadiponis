@@ -671,6 +671,10 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
     return this.datos.some((dato) => dato.mostrarClasificacion);
   }
 
+  formatearTotal(total: number): number | string {
+    return total > 200 ? 'ELI' : total;
+  }
+
   private convertirTiempoASegundos(tiempo: string): number {
     if (!tiempo || tiempo === '-') return 999999;
 
@@ -1092,7 +1096,7 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
         Jinete: dato.nombreJinete,
         Caballo: dato.caballo,
         Club: dato.club,
-        Total: dato.total,
+        Total: this.formatearTotal(dato.total),
         'Sábado Puntos': dato.sabado.puntos,
         'Sábado Tiempo': dato.sabado.tiempo,
         'Sábado Caballo': dato.sabado.caballo,
@@ -1287,7 +1291,7 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
                 </td>
                 <td>${dato.caballo.toUpperCase()}</td>
                 <td>${dato.club ? dato.club.toUpperCase() : '-'}</td>
-                <td class="total-column">${dato.total}</td>
+                <td class="total-column">${this.formatearTotal(dato.total)}</td>
                 <td>
                   ${
                     dato.sabado?.puntos !== undefined &&
