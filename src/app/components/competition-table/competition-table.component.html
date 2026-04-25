@@ -183,7 +183,7 @@
                 </td>
                 <td>{{ dato.caballo | uppercase }}</td>
                 <td>{{ dato.club | uppercase }}</td>
-                <td class="total-column">{{ formatearTotal(dato.total) }}</td>
+                <td class="total-column">{{ formatearTotal(dato) }}</td>
                 <td
                   [title]="getTooltipText(dato.sabado)"
                   [class.tooltip-bottom]="i >= datos.length - 3"

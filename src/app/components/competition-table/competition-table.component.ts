@@ -526,11 +526,18 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
       }
 
       posicionReal++;
-      return {
+      const fila = {
         ...jinete,
         clasificacion: clasificacionActual,
         mostrarClasificacion: todosLosDiasCompletos, // Solo mostrar clasificación si todos los días están completos
       } as CompetitionData;
+
+      if (this.formatearTotal(fila) === 'ELI') {
+        fila.clasificacion = 0;
+        fila.mostrarClasificacion = false;
+      }
+
+      return fila;
     });
     const eliminadosAlFinal = jinetesEliminados
       .sort((a: any, b: any) => a.total - b.total)
@@ -671,8 +678,37 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
     return this.datos.some((dato) => dato.mostrarClasificacion);
   }
 
-  formatearTotal(total: number): number | string {
-    return total > 200 ? 'ELI' : total;
+  private tieneMarcaEliminacion(valor: any): boolean {
+    return (
+      typeof valor === 'string' &&
+      ELIMINACIONES.includes(valor.toUpperCase())
+    );
+  }
+
+  formatearTotal(dato: CompetitionData): number | string {
+    const tieneEliminacion = ['sabado', 'domingo', 'desempate'].some((dia) => {
+      const puntosOriginal = (dato as any)[dia]?.puntosOriginal;
+      const puntos = (dato as any)[dia]?.puntos;
+      const cl = (dato as any)[dia]?.cl;
+      return (
+        this.tieneMarcaEliminacion(puntosOriginal) ||
+        this.tieneMarcaEliminacion(puntos) ||
+        this.tieneMarcaEliminacion(cl)
+      );
+    });
+
+    if (tieneEliminacion) {
+      return 'ELI';
+    }
+
+    return dato.total > 200 ? 'ELI' : dato.total;
+  }
+
+  private formatearParaImpresion(valor: any): string {
+    if (valor === undefined || valor === null || valor === '-') {
+      return '';
+    }
+    return String(valor);
   }
 
   private convertirTiempoASegundos(tiempo: string): number {
@@ -1096,7 +1132,7 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
         Jinete: dato.nombreJinete,
         Caballo: dato.caballo,
         Club: dato.club,
-        Total: this.formatearTotal(dato.total),
+        Total: this.formatearTotal(dato),
         'Sábado Puntos': dato.sabado.puntos,
         'Sábado Tiempo': dato.sabado.tiempo,
         'Sábado Caballo': dato.sabado.caballo,
@@ -1132,11 +1168,12 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
 
     // Obtener el idioma actual
     const currentLang = this.translateService.getCurrentLang();
+    const year = this.competitionService.getTemporadaActiva();
     const locale = currentLang === 'eus' ? 'eu-ES' : 'es-ES';
     
     // Obtener traducciones
-    const title = this.t('app.title');
-    const classification = this.t('competitionTable.table.title');
+    const title = this.t('app.title', { year });
+    const classification = this.t('competitionTable.table.title', { year });
     const categoryLabel = this.t('common.labels.category');
     const dateLabel = currentLang === 'eus' ? 'Data' : 'Fecha';
     const clasLabel = this.t('competitionTable.table.classification');
@@ -1291,20 +1328,20 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
                 </td>
                 <td>${dato.caballo.toUpperCase()}</td>
                 <td>${dato.club ? dato.club.toUpperCase() : '-'}</td>
-                <td class="total-column">${this.formatearTotal(dato.total)}</td>
+                <td class="total-column">${this.formatearTotal(dato as CompetitionData)}</td>
                 <td>
                   ${
                     dato.sabado?.puntos !== undefined &&
                     dato.sabado?.puntos !== null
-                      ? dato.sabado.puntos
-                      : '-'
+                      ? this.formatearParaImpresion(dato.sabado.puntos)
+                      : ''
                   }
                 </td>
                 <td>
-                  ${this.formatearDomingo(dato.domingo)}
+                  ${this.formatearParaImpresion(this.formatearDomingo(dato.domingo))}
                 </td>
                 ${!this.categoriaUsaSoloTiempoDomingo(this.categoriaSeleccionada) ? `<td>
-                  ${this.formatearDesempate(dato.desempate)}
+                  ${this.formatearParaImpresion(this.formatearDesempate(dato.desempate))}
                 </td>` : ''}
               </tr>
             `

@@ -524,6 +524,16 @@ h2 {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+    width: 100%;
+  }
+  .selectors-container {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .styled-select {
+    min-width: 0;
+    width: 100%;
   }
   h1 {
     font-size: 1.3em;
@@ -563,6 +573,17 @@ h2 {
       font-size: 0.98em;
     }
   }
+
+  .header-buttons {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .download-btn,
+  .print-btn {
+    flex: 1 1 160px;
+    justify-content: center;
+  }
   h2 {
     font-size: 1.1em;
     margin-bottom: 10px;
@@ -583,6 +604,21 @@ h2 {
       padding: 5px 2px;
       font-size: 0.89em;
     }
+  }
+
+  .inicio-container {
+    padding: 20px 10px;
+  }
+
+  .concurso-btn {
+    width: 100%;
+    max-width: 100%;
+    font-size: 1em;
+    padding: 14px 10px;
+  }
+
+  .normativa-btn {
+    max-width: 100%;
   }
   .explorer-btn {
     font-size: 0.95em;

@@ -48,6 +48,14 @@ app-root {
   min-height: 100vh;
 }
 
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
 *,
 *::before,
 *::after {
