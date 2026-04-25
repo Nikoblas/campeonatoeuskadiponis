@@ -39,19 +39,19 @@
     }
   },
   "app": {
-    "title": "Ponizko Euskadiko Oztopo-jauziko 2025eko Txapelketaren sailkapena 2025",
-    "summary": " Ponizko Euskadiko Oztopo-jauziko 2025eko Txapelketaren laburpena 2025"
+    "title": "Ponizko Euskadiko Oztopo-jauziko {{year}}eko txapelketaren emaitzak",
+    "summary": "Ponizko Euskadiko Oztopo-jauziko {{year}}eko txapelketaren laburpena"
   },
   "competitionTable": {
     "home": {
       "title": "Kategoriaren araberako sailkapena",
-      "championshipRules": "Ponizko Euskadiko Oztopo-jauziko 2025eko Txapelketaren oinarriak",
-      "downloadAdvance": "2025EKO EGITARAUA JAITSI",
-      "downloadRules": "2025EKO ARAUDIA JAISI",
+      "championshipRules": "Ponizko Euskadiko Oztopo-jauziko {{year}}eko txapelketaren oinarriak",
+      "downloadAdvance": "{{year}}eko egitaraua jaitsi",
+      "downloadRules": "{{year}}eko araudia jaitsi",
       "start": "Hasiera"
     },
     "table": {
-      "title": "SAILKAPENA",
+      "title": "Sailkapena {{year}}",
       "classification": "Clas.",
       "emptyState": "Oraindik ez dago emaitzarik kategoria honetarako. Batzorde antolatzaileak zerrendak argitaratuko ditu probak amaitu eta datuak baliozkotu ahala. Mesedez, saiatu berriro minutu batzuk barru.",
       "downloadExcel": "Excela jaitsi"

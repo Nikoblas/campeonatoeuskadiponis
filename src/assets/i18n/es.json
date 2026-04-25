@@ -40,19 +40,19 @@
     }
   },
   "app": {
-    "title": "Clasificación de Campeonato de Euskadi de Ponis de Salto 2025",
-    "summary": "Resumen de Campeonato de Euskadi de Ponis de Salto 2025"
+    "title": "Resultados Campeonato de Euskadi de Ponis de Salto {{year}}",
+    "summary": "Resumen de Campeonato de Euskadi de Ponis de Salto {{year}}"
   },
   "competitionTable": {
     "home": {
       "title": "Clasificaciones por Categoría",
-      "championshipRules": "Bases del Campeonato de Euskadi de Ponis de Salto 2025",
-      "downloadAdvance": "DESCARGAR AVANCE 2025",
-      "downloadRules": "DESCARGAR NORMATIVA 2025",
+      "championshipRules": "Bases del Campeonato de Euskadi de Ponis de Salto {{year}}",
+      "downloadAdvance": "Descargar avance {{year}}",
+      "downloadRules": "Descargar normativa {{year}}",
       "start": "Inicio"
     },
     "table": {
-      "title": "Clasificación",
+      "title": "Clasificación {{year}}",
       "classification": "Clas.",
       "emptyState": "Todavía no hay resultados disponibles para esta categoría. El comité organizador publicará los listados a medida que finalicen las pruebas y se validen los datos. Por favor, vuelve a intentarlo en unos minutos.",
       "downloadExcel": "Descargar Excel"

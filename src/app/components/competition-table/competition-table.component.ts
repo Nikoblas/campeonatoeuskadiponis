@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, ActivatedRoute, Router } from '@angular/router';
@@ -14,6 +15,7 @@ import { TranslateService } from '../../services/translate.service';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom, Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import * as XLSX from 'xlsx';
 
 @Component({
@@ -49,7 +51,8 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
     private translateService: TranslateService,
     private http: HttpClient,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private titleService: Title
   ) {}
 
   // Método helper para traducir en el componente
@@ -151,6 +154,21 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
       }
     });
     this.subscriptions.push(errorSub);
+
+    const titleSub = this.translateService
+      .getTranslationsLoaded$()
+      .pipe(filter((loaded) => loaded))
+      .subscribe(() => this.updateDocumentTitle());
+    this.subscriptions.push(titleSub);
+  }
+
+  private updateDocumentTitle(): void {
+    const year =
+      this.temporadaSeleccionada ||
+      this.competitionService.getTemporadaActiva();
+    this.titleService.setTitle(
+      this.translateService.translate('app.title', { year })
+    );
   }
 
   ngOnDestroy() {
@@ -186,6 +204,8 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
 
   cambiarTemporada() {
     this.competitionService.setTemporadaActiva(this.temporadaSeleccionada);
+    this.categorias = this.competitionService.getCategorias();
+    this.updateDocumentTitle();
     if (this.categoriaSeleccionada !== 'inicio') {
       this.cargarDatos();
     }
@@ -211,7 +231,7 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
       const blob = new Blob([response], { type: 'application/pdf' });
       const link = document.createElement('a');
       link.href = window.URL.createObjectURL(blob);
-      link.download = `concurso-${concurso}.pdf`;
+      link.download = `${concurso}-${temporada}.pdf`;
       link.click();
       window.URL.revokeObjectURL(link.href);
     } catch (error) {
@@ -391,37 +411,32 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
           }
         }
 
-        // Verificar que el jinete corrió sábado
         // Un jinete ha corrido si tiene datos (incluso con 0 puntos)
         const corrioSabado = jinete.sabado && jinete.sabado.puntos !== '-';
 
-        // Verificar si existe archivo de domingo para esta categoría
+        // Verificar si existe información de domingo para esta categoría
         const existeDomingo = datosCategoria.some(
           (d) => d.dia === 'DOMINGO' && d.datos && d.datos.length > 0
         );
 
-        // Si existe domingo, también debe haber corrido domingo
-        let corrioDomingo = true; // Por defecto true si no existe archivo de domingo
-        if (existeDomingo) {
-          corrioDomingo = jinete.domingo && jinete.domingo.puntos !== '-';
-        }
+        // Mientras no haya domingo publicado, con sabado basta para ser apto.
+        const corrioDomingo = jinete.domingo && jinete.domingo.puntos !== '-';
+        const cumpleMinimoResultados = existeDomingo
+          ? corrioSabado && corrioDomingo
+          : corrioSabado;
 
-        // Si no corrió sábado o domingo (si existe), excluir de la clasificación
-        if (!corrioSabado || !corrioDomingo) {
+        if (!cumpleMinimoResultados) {
           return null; // Será filtrado después
         }
 
-        // Verificar eliminaciones (E, EL, ELI, RET, NC) usando puntos originales
-        // Si tiene al menos una eliminación, excluir de la clasificación
-        for (const p of ['sabado', 'domingo']) {
+        // Marcar si tiene eliminación para moverlo al final sin puesto.
+        const tieneEliminacion = ['sabado', 'domingo'].some((p) => {
           const puntosOriginales = jinete[p]?.puntosOriginal;
-          if (
+          return (
             typeof puntosOriginales === 'string' &&
             ELIMINACIONES.includes(puntosOriginales.toUpperCase())
-          ) {
-            return null; // Excluir si tiene cualquier eliminación
-          }
-        }
+          );
+        });
 
         let total = 0;
         let resultadosValidos = 0;
@@ -455,7 +470,8 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
           ...jinete,
           total,
           resultadosValidos,
-          eliminaciones: 0, // Ya no se usa, pero se mantiene para compatibilidad
+          eliminaciones: tieneEliminacion ? 1 : 0,
+          tieneEliminacion,
           resultados: ['sabado', 'domingo'].map(
             (p) => jinete[p]?.puntos
           ),
@@ -463,8 +479,15 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
       })
       .filter((jinete) => jinete !== null); // Filtrar jinetes excluidos
     
-    // Primero ordenar solo por puntos totales
-    let ordenados = listadoJinetes.sort((a: any, b: any) => {
+    const jinetesClasificables = listadoJinetes.filter(
+      (jinete: any) => !jinete.tieneEliminacion
+    );
+    const jinetesEliminados = listadoJinetes.filter(
+      (jinete: any) => jinete.tieneEliminacion
+    );
+
+    // Primero ordenar solo por puntos totales (solo clasificados)
+    let ordenados = jinetesClasificables.sort((a: any, b: any) => {
       return a.total - b.total;
     });
 
@@ -480,7 +503,7 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
 
     // Aplicar clasificación al orden final (ya ordenado correctamente)
     const usarSoloTiempo = this.categoriaUsaSoloTiempoDomingo(this.categoriaSeleccionada);
-    ordenados = ordenFinal.map((jinete: any) => {
+    const clasificados = ordenFinal.map((jinete: any) => {
       const puntosDesempate = this.obtenerPuntosDesempate(jinete.desempate);
       // Para categorías B2, C2, D2, usar el tiempo del domingo directamente
       const tiempoDesempate = usarSoloTiempo
@@ -509,8 +532,17 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
         mostrarClasificacion: todosLosDiasCompletos, // Solo mostrar clasificación si todos los días están completos
       } as CompetitionData;
     });
+    const eliminadosAlFinal = jinetesEliminados
+      .sort((a: any, b: any) => a.total - b.total)
+      .map((jinete: any) => {
+        return {
+          ...jinete,
+          clasificacion: 0,
+          mostrarClasificacion: false,
+        } as CompetitionData;
+      });
 
-    this.datos = ordenados;
+    this.datos = [...clasificados, ...eliminadosAlFinal];
   }
 
   private buscarJineteEnDatos(
@@ -633,6 +665,10 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
     ).toUpperCase()}\nPuntos: ${(
       '' + competitionDay.puntos
     ).toUpperCase()}\nClasificación: ${('' + competitionDay.cl).toUpperCase()}`;
+  }
+
+  mostrarColumnaClasificacion(): boolean {
+    return this.datos.some((dato) => dato.mostrarClasificacion);
   }
 
   private convertirTiempoASegundos(tiempo: string): number {
@@ -1225,7 +1261,7 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
           <table class="competition-table">
           <thead>
             <tr>
-              ${this.datos[0]?.mostrarClasificacion ? `<th>${clasLabel}</th>` : ''}
+              ${this.mostrarColumnaClasificacion() ? `<th>${clasLabel}</th>` : ''}
               <th>${riderLabel}</th>
               <th>${horseLabel}</th>
               <th>${clubLabel}</th>
@@ -1241,8 +1277,8 @@ export class CompetitionTableComponent implements OnInit, OnDestroy {
                 (dato, i) => `
               <tr class="${this.getRowClass(i, dato)}">
                 ${
-                  dato.mostrarClasificacion
-                    ? `<td>${dato.clasificacion}</td>`
+                  this.mostrarColumnaClasificacion()
+                    ? `<td>${dato.mostrarClasificacion ? dato.clasificacion : '-'}</td>`
                     : ''
                 }
                 <td>

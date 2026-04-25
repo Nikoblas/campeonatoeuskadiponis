@@ -1,7 +1,7 @@
 <div class="container">
   <div class="header">
     <div class="header-left">
-      <h1>{{ 'app.summary' | translate }}</h1>
+      <h1>{{ 'app.summary' | translate: { year: temporadaSeleccionada } }}</h1>
       <div class="selectors-container">
         <select
           id="categoria"
@@ -65,13 +65,13 @@
           </button>
         </div>
 
-        <h2 class="mt-5">{{ 'competitionTable.home.championshipRules' | translate }}</h2>
+        <h2 class="mt-5">{{ 'competitionTable.home.championshipRules' | translate: { year: temporadaSeleccionada } }}</h2>
         <button
           class="concurso-btn normativa-btn"
           (click)="descargarPDF('avance')"
         >
           <i class="fas fa-file-pdf"></i>
-          {{ 'competitionTable.home.downloadAdvance' | translate }}
+          {{ 'competitionTable.home.downloadAdvance' | translate: { year: temporadaSeleccionada } }}
         </button>
         <br />
         <button
@@ -79,7 +79,7 @@
           (click)="descargarPDF('normativa')"
         >
           <i class="fas fa-file-pdf"></i>
-          {{ 'competitionTable.home.downloadRules' | translate }}
+          {{ 'competitionTable.home.downloadRules' | translate: { year: temporadaSeleccionada } }}
         </button>
       </div>
     </ng-container>
@@ -88,7 +88,7 @@
       <div class="table-container">
           <div class="table-header">
             <h2>
-              {{ 'competitionTable.table.title' | translate }} {{ getCategoriaVisual(categoriaSeleccionada) }}
+              {{ 'competitionTable.table.title' | translate: { year: temporadaSeleccionada } }} {{ getCategoriaVisual(categoriaSeleccionada) }}
             </h2>
             <div class="header-buttons">
               <button
@@ -117,7 +117,7 @@
           <table class="competition-table" *ngIf="datos.length > 0">
             <thead>
               <tr>
-                <th *ngIf="datos[0]?.mostrarClasificacion">{{ 'competitionTable.table.classification' | translate }}</th>
+                <th *ngIf="mostrarColumnaClasificacion()">{{ 'competitionTable.table.classification' | translate }}</th>
                 <th>{{ 'common.labels.rider' | translate }}</th>
                 <th>{{ 'common.labels.horse' | translate }}</th>
                 <th>{{ 'common.labels.club' | translate }}</th>
@@ -143,8 +143,8 @@
                   'top-10': i === 9 && dato.mostrarClasificacion
                 }"
               >
-                <td *ngIf="dato.mostrarClasificacion">
-                  {{ dato.clasificacion }}
+                <td *ngIf="mostrarColumnaClasificacion()">
+                  {{ dato.mostrarClasificacion ? dato.clasificacion : '-' }}
                 </td>
                 <td>
                   <span
