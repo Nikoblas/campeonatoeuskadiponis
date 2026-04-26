@@ -40,7 +40,7 @@
   </Style>
  </Styles>
  <Worksheet ss:Name="Sheet1">
-  <Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="51" x:FullColumns="1"
+  <Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="50" x:FullColumns="1"
    x:FullRows="1" ss:DefaultColumnWidth="200.25" ss:DefaultRowHeight="15">
    <Column ss:Width="39.75"/>
    <Column ss:Width="369.75"/>
@@ -392,16 +392,6 @@
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String"></Data></Cell>
-    <Cell><Data ss:Type="String">MARA GONZALEZ QUIÑONES</Data></Cell>
-    <Cell><Data ss:Type="Number">367341</Data></Cell>
-    <Cell><Data ss:Type="String">CLUB HIPICO MUNGIA</Data></Cell>
-    <Cell><Data ss:Type="String"></Data></Cell>
-    <Cell><Data ss:Type="String">EROS DE L'ETAPE</Data></Cell>
-    <Cell><Data ss:Type="Number">155450</Data></Cell>
-    <Cell><Data ss:Type="String"></Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell><Data ss:Type="String"></Data></Cell>
     <Cell><Data ss:Type="String">LEIRE MIRANDA LANDABURU</Data></Cell>
     <Cell><Data ss:Type="Number">329448</Data></Cell>
     <Cell><Data ss:Type="String">CLUB HIPICO MUNGIA</Data></Cell>
@@ -568,8 +558,8 @@
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>31</ActiveRow>
-     <RangeSelection>R32</RangeSelection>
+     <ActiveRow>34</ActiveRow>
+     <RangeSelection>R35</RangeSelection>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
