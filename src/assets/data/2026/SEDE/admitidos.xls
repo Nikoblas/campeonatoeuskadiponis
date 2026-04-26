@@ -40,7 +40,7 @@
   </Style>
  </Styles>
  <Worksheet ss:Name="Sheet1">
-  <Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="52" x:FullColumns="1"
+  <Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="51" x:FullColumns="1"
    x:FullRows="1" ss:DefaultColumnWidth="200.25" ss:DefaultRowHeight="15">
    <Column ss:Width="39.75"/>
    <Column ss:Width="369.75"/>
@@ -382,16 +382,6 @@
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String"></Data></Cell>
-    <Cell><Data ss:Type="String">NOA GONZALEZ QUIÑONES</Data></Cell>
-    <Cell><Data ss:Type="Number">375542</Data></Cell>
-    <Cell><Data ss:Type="String">CLUB HIPICO MUNGIA</Data></Cell>
-    <Cell><Data ss:Type="String"></Data></Cell>
-    <Cell><Data ss:Type="String">JEDONIOUR POUNE'S</Data></Cell>
-    <Cell><Data ss:Type="Number">179739</Data></Cell>
-    <Cell><Data ss:Type="String"></Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell><Data ss:Type="String"></Data></Cell>
     <Cell><Data ss:Type="String">LEIRE MIRANDA LANDABURU</Data></Cell>
     <Cell><Data ss:Type="Number">329448</Data></Cell>
     <Cell><Data ss:Type="String">CLUB HIPICO MUNGIA</Data></Cell>
@@ -550,7 +540,7 @@
     <Cell><Data ss:Type="Number">151880</Data></Cell>
     <Cell><Data ss:Type="String"></Data></Cell>
    </Row>
-   <Row>
+   <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String"></Data></Cell>
     <Cell><Data ss:Type="String">JUNE ROMAN MARTINEZ DE GREÑO</Data></Cell>
     <Cell><Data ss:Type="Number">306700</Data></Cell>
@@ -560,7 +550,7 @@
     <Cell><Data ss:Type="String">VS9373</Data></Cell>
     <Cell><Data ss:Type="String"></Data></Cell>
    </Row>
-   <Row>
+   <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String"></Data></Cell>
     <Cell><Data ss:Type="String">IZARO FUICA MURIAS</Data></Cell>
     <Cell><Data ss:Type="String">VS36877</Data></Cell>
@@ -574,12 +564,12 @@
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
    <Unsynced/>
    <Selected/>
-   <TopRowVisible>21</TopRowVisible>
+   <TopRowVisible>12</TopRowVisible>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>50</ActiveRow>
-     <RangeSelection>R51:R52</RangeSelection>
+     <ActiveRow>33</ActiveRow>
+     <RangeSelection>R34</RangeSelection>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
