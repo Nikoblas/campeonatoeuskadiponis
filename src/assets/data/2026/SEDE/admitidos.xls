@@ -40,7 +40,7 @@
   </Style>
  </Styles>
  <Worksheet ss:Name="Sheet1">
-  <Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="50" x:FullColumns="1"
+  <Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="52" x:FullColumns="1"
    x:FullRows="1" ss:DefaultColumnWidth="200.25" ss:DefaultRowHeight="15">
    <Column ss:Width="39.75"/>
    <Column ss:Width="369.75"/>
@@ -550,6 +550,26 @@
     <Cell><Data ss:Type="Number">151880</Data></Cell>
     <Cell><Data ss:Type="String"></Data></Cell>
    </Row>
+   <Row>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">JUNE ROMAN MARTINEZ DE GREÑO</Data></Cell>
+    <Cell><Data ss:Type="Number">306700</Data></Cell>
+    <Cell><Data ss:Type="String">CLUB HIPICO ZALDI EDER (GOIHERRI)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">KOROA</Data></Cell>
+    <Cell><Data ss:Type="String">VS9373</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">IZARO FUICA MURIAS</Data></Cell>
+    <Cell><Data ss:Type="String">VS36877</Data></Cell>
+    <Cell><Data ss:Type="String">CLUB HIPICO ZALDI EDER (GOIHERRI)</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+    <Cell><Data ss:Type="String">DAMA</Data></Cell>
+    <Cell><Data ss:Type="Number">154583</Data></Cell>
+    <Cell><Data ss:Type="String"></Data></Cell>
+   </Row>
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
    <Unsynced/>
@@ -558,8 +578,8 @@
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>34</ActiveRow>
-     <RangeSelection>R35</RangeSelection>
+     <ActiveRow>50</ActiveRow>
+     <RangeSelection>R51:R52</RangeSelection>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
